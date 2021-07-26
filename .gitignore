@@ -1,0 +1,30 @@
+# Created by https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,visualstudiocode
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# dependencies
+/node_modules
+
+# misc 
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V10

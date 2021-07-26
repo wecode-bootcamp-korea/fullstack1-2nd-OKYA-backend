@@ -1,0 +1,41 @@
+{
+  "name": "fullstack1-2nd-okya-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wecode-bootcamp-korea/fullstack1-2nd-OKYA-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wecode-bootcamp-korea/fullstack1-2nd-OKYA-backend/issues"
+  },
+  "homepage": "https://github.com/wecode-bootcamp-korea/fullstack1-2nd-OKYA-backend#readme",
+  "dependencies": {
+    "@prisma/client": "^2.27.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.12",
+    "stream-file": "^0.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/eslint-parser": "^7.14.7",
+    "@babel/node": "^7.14.7",
+    "@babel/preset-env": "^7.14.8",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.31.0",
+    "prisma": "^2.27.0"
+  }
+}
