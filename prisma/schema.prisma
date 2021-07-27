@@ -9,3 +9,156 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model User {
+  id             Int      @id @default(autoincrement())
+  email          String   @db.VarChar(200)
+  password       String   @db.VarChar(200)
+  name           String   @db.VarChar(45)
+  phoneNumber    String   @map("phone_number") @db.VarChar(45)
+  roadAddress    String   @map("road_address") @db.VarChar(100)
+  detailAddress  String   @map("detail_address") @db.VarChar(200)
+  zipCode        String   @map("zip_code") @db.VarChar(45)
+  socialPlatform String?  @map("social_platform") @db.VarChar(45)
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  cart  Cart[]
+  order Order[]
+
+  @@map("users")
+}
+
+model Cart {
+  id        Int      @id @default(autoincrement())
+  quantity  Int
+  userId    Int      @map("user_id")
+  productId Int      @map("product_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user    User    @relation(fields: [userId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("carts")
+}
+
+model OrderedProduct {
+  id        Int      @id @default(autoincrement())
+  quantity  Int
+  productId Int      @map("product_id")
+  orderId   Int      @map("order_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  product Product @relation(fields: [productId], references: [id])
+  order   Order   @relation(fields: [orderId], references: [id])
+
+  @@map("ordered_products")
+}
+
+model Order {
+  id            Int      @id @default(autoincrement())
+  quantity      Int
+  orderNumber   String   @map("order_number") @db.VarChar(45)
+  userId        Int      @map("user_id")
+  orderStatusId Int      @map("order_status_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  orderedProduct OrderedProduct[]
+  orderStatus    OrderStatus      @relation(fields: [orderStatusId], references: [id])
+  user           User             @relation(fields: [userId], references: [id])
+
+  @@map("orders")
+}
+
+model OrderStatus {
+  id        Int      @id @default(autoincrement())
+  status    String   @db.VarChar(45)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  order Order[]
+
+  @@map("order_status")
+}
+
+model ProductGroup {
+  id                Int      @id @default(autoincrement())
+  name              String   @db.VarChar(45)
+  price             Decimal  @db.Decimal(8, 2)
+  description       String   @db.VarChar(100)
+  productCategoryId Int      @map("product_category_id")
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  product         Product[]
+  image           Image[]
+  productCategory ProductCategory @relation(fields: [productCategoryId], references: [id])
+
+  @@map("products_group")
+}
+
+model ProductCategory {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(45)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  productGroup ProductGroup[]
+
+  @@map("products_categories")
+}
+
+model Product {
+  id              Int      @id @default(autoincrement())
+  name            String   @db.VarChar(45)
+  additionalPrice Decimal  @map("additional_price") @db.Decimal(8, 2)
+  imageUrl        String   @map("image_url") @db.VarChar(2000)
+  productGroupId  Int      @map("product_group_id")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  cart           Cart[]
+  orderedProduct OrderedProduct[]
+  productGroup   ProductGroup     @relation(fields: [productGroupId], references: [id])
+
+  @@map("products")
+}
+
+model Image {
+  id             Int      @id @default(autoincrement())
+  imageUrl       String   @map("image_url") @db.VarChar(2000)
+  productGroupId Int      @map("product_group_id")
+  imageTypeId    Int      @map("image_type_id")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  imageType    ImageType    @relation(fields: [imageTypeId], references: [id])
+  productGroup ProductGroup @relation(fields: [productGroupId], references: [id])
+
+  @@map("images")
+}
+
+model ImageType {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(45)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  image Image[]
+
+  @@map("images_types")
+}
+
+model HomeFurnishingCategory {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(45)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  masonry Masonry[]
+
+  @@map("home_furnishing_categories")
+}
+
+model Masonry {
+  id                       Int      @id @default(autoincrement())
+  imageUrl                 String   @map("image_url") @db.VarChar(2000)
+  homeFurnishingCategoryId Int      @map("home_furnishing_category_id")
+  createdAt                DateTime @default(now()) @map("created_at")
+
+  homeFurnishingCategory HomeFurnishingCategory @relation(fields: [homeFurnishingCategoryId], references: [id])
+
+  @@map("masonries")
+}

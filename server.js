@@ -1,6 +1,7 @@
 import http from 'http';
 import app from './app';
 import dotenv from 'dotenv';
+import prisma from './prisma';
 
 dotenv.config();
 const server = http.createServer(app);
@@ -13,6 +14,7 @@ const start = async () => {
     );
   } catch (err) {
     console.error(err);
+    await prisma.$disconnect();
   }
 };
 
