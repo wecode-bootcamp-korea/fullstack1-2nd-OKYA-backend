@@ -16,6 +16,7 @@ Icon
 
 # dependencies
 /node_modules
+/dataUploader
 
 # misc 
 .env
