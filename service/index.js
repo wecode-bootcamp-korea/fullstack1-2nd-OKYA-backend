@@ -1,3 +1,3 @@
-import kakaoService from './kakaoService';
+import userService from './userService';
 
-export { kakaoService };
+export { userService };

@@ -1,3 +1,3 @@
-import kakaoDao from './kakaoDao';
+import userDao from './userDao';
 
-export { kakaoDao };
+export { userDao };

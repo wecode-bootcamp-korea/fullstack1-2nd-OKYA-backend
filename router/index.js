@@ -1,7 +1,8 @@
 import express from 'express';
-import kakaoRouter from './kakaoRouter';
 const router = express.Router();
 
-router.use('/', kakaoRouter);
+import userRouter from './userRouter';
+
+router.use('/users', userRouter);
 
 export default router;

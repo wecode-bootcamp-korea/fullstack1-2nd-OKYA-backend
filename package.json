@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node server.js"
+    "start": "nodemon --exec babel-node server.js",
+    "test": "cat .env.test > .env && npx prisma migrate reset -f && jest --detectOpenHandles --forceExit"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,8 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.12",
+    "passport": "^0.4.1",
+    "passport-kakao": "^1.0.1",
     "stream-file": "^0.3.0"
   },
   "devDependencies": {
@@ -36,8 +38,12 @@
     "@babel/eslint-parser": "^7.14.7",
     "@babel/node": "^7.14.7",
     "@babel/preset-env": "^7.14.8",
+    "babel-jest": "^27.0.6",
     "dotenv": "^10.0.0",
     "eslint": "^7.31.0",
-    "prisma": "^2.27.0"
+    "jest": "^27.0.6",
+    "jest-cli": "^27.0.6",
+    "prisma": "^2.27.0",
+    "supertest": "^6.1.4"
   }
 }
