@@ -1,3 +1,3 @@
-import kakaoService from './kakaoService';
+import cartService from './cartService';
 
-export { kakaoService };
+export { cartService };
