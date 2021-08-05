@@ -1,3 +1,3 @@
-import kakaoController from './kakaoController';
+import userController from './userController';
 
-export { kakaoController };
+export { userController };
