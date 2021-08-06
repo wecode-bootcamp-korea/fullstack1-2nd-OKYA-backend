@@ -1,3 +1,5 @@
 import userDao from './userDao';
+import cartDao from './cartDao';
+import kakaoDao from './kakaoDao';
 
-export { userDao };
+export { userDao, cartDao, kakaoDao };
