@@ -1,5 +1,13 @@
 import prisma from '../prisma';
 
+const findUser = async (id) => {
+  return await prisma.user.findUnique({
+    where: {
+      id: id,
+    },
+  });
+};
+
 const getEmail = async (email) => {
   return await prisma.user.findMany({
     where: {
@@ -42,4 +50,4 @@ const createUser = async (
   });
 };
 
-export default { getEmail, getUsers, createUser };
+export default { findUser, getEmail, getUsers, createUser };
