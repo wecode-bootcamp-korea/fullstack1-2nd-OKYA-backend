@@ -31,10 +31,23 @@ const updateCartItemQuantity = async (req, res) => {
     }
 
     res.status(200).json({ message: 'CART_ITEM_QUANTITY_UPDATED_SUCCESFULLY' });
+  } catch {
+    console.log(err);
+    res.status(err.statusCode || 500).json({ message: err.message });
+  }
+};
+
+const deleteCartItems = async (req, res) => {
+  try {
+    const { id: userId } = req.foundUser;
+    const { id } = req.body;
+
+    await cartService.deleteCartItems(id);
+    res.status(200).json({ message: 'CART_ITEM_DELETED_SUCCESSFULLY' });
   } catch (err) {
     console.log(err);
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
 
-export default { getCartItems, updateCartItemQuantity };
+export default { getCartItems, updateCartItemQuantity, deleteCartItems };

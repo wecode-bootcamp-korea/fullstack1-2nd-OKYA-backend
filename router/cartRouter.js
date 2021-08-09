@@ -6,5 +6,6 @@ import validateToken from '../middleware/verify_jwt';
 
 router.get('/', validateToken, cartController.getCartItems);
 router.patch('/:id', validateToken, cartController.updateCartItemQuantity);
+router.delete('/', validateToken, cartController.deleteCartItems);
 
 export default router;

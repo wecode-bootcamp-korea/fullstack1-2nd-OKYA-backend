@@ -47,4 +47,12 @@ const updateCartItemQuantity = async (id, quantity, isIncrement) => {
   }
 };
 
-export default { getCartItems, updateCartItemQuantity };
+const deleteCartItems = async (id) => {
+  return prisma.cart.delete({
+    where: {
+      id: id,
+    },
+  });
+};
+
+export default { getCartItems, updateCartItemQuantity, deleteCartItems };
