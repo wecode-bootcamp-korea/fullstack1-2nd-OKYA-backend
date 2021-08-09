@@ -6,6 +6,7 @@ const getCartItems = async (userId) => {
   let newCartItems = [];
   for (let item of cartItems) {
     newCartItems.push({
+      cartItemId: item.id,
       id: item.product.id,
       name: item.product.name,
       imageUrl: item.product.imageUrl,

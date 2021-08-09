@@ -6,6 +6,7 @@ const getCartItems = async (userId) => {
       userId: userId,
     },
     select: {
+      id: true,
       product: {
         select: {
           id: true,
