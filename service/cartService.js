@@ -25,4 +25,13 @@ const deleteCartItems = async (id) => {
   return await cartDao.deleteCartItems(id);
 };
 
-export default { getCartItems, deleteCartItems, updateCartItemQuantity };
+const createCartItems = async (userId, quantity, productId) => {
+  return await cartDao.createCartItems(userId, quantity, productId);
+};
+
+export default {
+  createCartItems,
+  updateCartItemQuantity,
+  getCartItems,
+  deleteCartItems,
+};
