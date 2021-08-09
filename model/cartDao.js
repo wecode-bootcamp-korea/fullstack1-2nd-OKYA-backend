@@ -25,6 +25,26 @@ const getCartItems = async (userId) => {
   return cartItems;
 };
 
-export default {
-  getCartItems,
+const updateCartItemQuantity = async (id, quantity, isIncrement) => {
+  if (isIncrement === true) {
+    await prisma.cart.updateMany({
+      data: {
+        quantity: { increment: quantity },
+      },
+      where: {
+        id: id,
+      },
+    });
+  } else {
+    await prisma.cart.updateMany({
+      data: {
+        quantity: { decrement: quantity },
+      },
+      where: {
+        id: id,
+      },
+    });
+  }
 };
+
+export default { getCartItems, updateCartItemQuantity };
