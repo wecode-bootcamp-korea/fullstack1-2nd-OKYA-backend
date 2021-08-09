@@ -16,4 +16,8 @@ const getCartItems = async (userId) => {
   return newCartItems;
 };
 
-export default { getCartItems };
+const updateCartItemQuantity = async (id, quantity, isIncrement) => {
+  return await cartDao.updateCartItemQuantity(id, quantity, isIncrement);
+};
+
+export default { getCartItems, updateCartItemQuantity };
