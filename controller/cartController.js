@@ -50,4 +50,44 @@ const deleteCartItems = async (req, res) => {
   }
 };
 
-export default { getCartItems, updateCartItemQuantity, deleteCartItems };
+const createCartItems = async (req, res) => {
+  try {
+    const { id: userId } = req.foundUser;
+    const { productId, quantity } = req.body;
+    const essentialKeys = { productId, quantity };
+
+    const values = Object.values(essentialKeys);
+    const keys = Object.keys(essentialKeys);
+
+    const keyResultOfUndefined = keys.filter((key) => {
+      return essentialKeys[key] === undefined;
+    });
+
+    if (values.includes(undefined)) {
+      let error = new Error(`KEY_ERROR ${keyResultOfUndefined}`);
+      error.statusCode = 400;
+      throw error;
+    }
+
+    const createdProductCart = await cartService.createCartItems(
+      userId,
+      quantity,
+      productId
+    );
+
+    return res.status(201).json({
+      message: 'CART_ITEMS_CREATED_SUCCESSFULLY',
+      createdProductCart,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(err.statusCode || 500).json({ message: err.message });
+  }
+};
+
+export default {
+  getCartItems,
+  updateCartItemQuantity,
+  createCartItems,
+  deleteCartItems,
+};

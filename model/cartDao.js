@@ -56,4 +56,24 @@ const deleteCartItems = async (id) => {
   });
 };
 
-export default { getCartItems, updateCartItemQuantity, deleteCartItems };
+const createCartItems = async (userId, quantity, productId) => {
+  const createdCartItems = await prisma.cart.create({
+    data: {
+      user: {
+        connect: { id: userId },
+      },
+      quantity: quantity,
+      product: {
+        connect: { id: productId },
+      },
+    },
+  });
+  return createdCartItems;
+};
+
+export default {
+  getCartItems,
+  updateCartItemQuantity,
+  createCartItems,
+  deleteCartItems,
+};
